@@ -11,6 +11,7 @@ export interface Entry {
 }
 
 const STORAGE_KEY = 'journal-entries';
+const LAST_CLEAR_KEY = 'journal-last-clear';
 
 function generateId(): string {
 	// Fallback for browsers that don't support crypto.randomUUID()
@@ -46,8 +47,54 @@ function saveEntries(entries: Entry[]) {
 	}
 }
 
+function getLastClearDate(): string | null {
+	if (!browser) return null;
+	try {
+		return localStorage.getItem(LAST_CLEAR_KEY);
+	} catch (error) {
+		console.error('Failed to load last clear date:', error);
+		return null;
+	}
+}
+
+function setLastClearDate(date: string) {
+	if (!browser) return;
+	try {
+		localStorage.setItem(LAST_CLEAR_KEY, date);
+	} catch (error) {
+		console.error('Failed to save last clear date:', error);
+	}
+}
+
+function getTodayDateString(): string {
+	const today = new Date();
+	return today.toISOString().split('T')[0]; // Returns YYYY-MM-DD
+}
+
+function shouldClearEntries(): boolean {
+	const lastClear = getLastClearDate();
+	const today = getTodayDateString();
+	return lastClear !== today;
+}
+
 class JournalStore {
 	entries = $state<Entry[]>(loadEntries());
+
+	constructor() {
+		// Check if we need to clear entries on initialization
+		if (browser && shouldClearEntries()) {
+			this.clearAllEntries();
+		}
+
+		// Set up interval to check for date change every minute
+		if (browser) {
+			setInterval(() => {
+				if (shouldClearEntries()) {
+					this.clearAllEntries();
+				}
+			}, 60000); // Check every minute
+		}
+	}
 
 	addEntry(text: string, type: EntryType) {
 		const newEntry: Entry = {
@@ -71,6 +118,13 @@ class JournalStore {
 	deleteEntry(id: string) {
 		this.entries = this.entries.filter((entry) => entry.id !== id);
 		saveEntries(this.entries);
+	}
+
+	clearAllEntries() {
+		this.entries = [];
+		saveEntries(this.entries);
+		setLastClearDate(getTodayDateString());
+		console.log('Entries cleared for new day');
 	}
 }
 
