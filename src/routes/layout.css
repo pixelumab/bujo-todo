@@ -112,9 +112,23 @@
 }
 
 @layer base {
+	:root {
+		--safe-area-inset-top: env(safe-area-inset-top, 0px);
+		--safe-area-inset-right: env(safe-area-inset-right, 0px);
+		--safe-area-inset-bottom: env(safe-area-inset-bottom, 0px);
+		--safe-area-inset-left: env(safe-area-inset-left, 0px);
+	}
+
 	* {
 		@apply border-border outline-ring/50;
 	}
+
+	html,
+	body {
+		height: 100%;
+		overflow: hidden;
+	}
+
 	body {
 		@apply bg-background text-foreground;
 		font-family: 'Architects Daughter', cursive, system-ui, sans-serif;
