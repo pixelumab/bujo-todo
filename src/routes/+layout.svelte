@@ -56,7 +56,7 @@
 </script>
 
 <svelte:head>
-	<title>Pixelum ToDo - Simple Bullet Journal</title>
+	<title>Pixelum Bujo - Simple Bullet Journal</title>
 	<meta name="description" content="Simple offline-first bullet journal application" />
 	<link rel="icon" href="{base}/icon.svg" />
 	<meta
@@ -66,7 +66,7 @@
 	<meta name="theme-color" content="#ffffff" />
 	<meta name="apple-mobile-web-app-capable" content="yes" />
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-	<meta name="apple-mobile-web-app-title" content="Pixelum ToDo" />
+	<meta name="apple-mobile-web-app-title" content="Pixelum Bujo" />
 	<link rel="apple-touch-icon" href="{base}/icon-192.png" />
 	<link rel="preconnect" href="https://fonts.googleapis.com" />
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
