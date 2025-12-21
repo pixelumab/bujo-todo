@@ -1,11 +1,18 @@
-const CACHE_NAME = 'todo-pwa-v1';
-const RUNTIME_CACHE = 'todo-pwa-runtime-v1';
+const CACHE_NAME = 'todo-pwa-v2';
+const RUNTIME_CACHE = 'todo-pwa-runtime-v2';
 
 // Assets to cache on install
 const PRECACHE_URLS = [
 	'/',
 	'/manifest.json'
 ];
+
+// Listen for skip waiting message
+self.addEventListener('message', (event) => {
+	if (event.data && event.data.type === 'SKIP_WAITING') {
+		self.skipWaiting();
+	}
+});
 
 // Install event - cache essential assets
 self.addEventListener('install', (event) => {
@@ -14,7 +21,6 @@ self.addEventListener('install', (event) => {
 			return cache.addAll(PRECACHE_URLS);
 		})
 	);
-	self.skipWaiting();
 });
 
 // Activate event - clean up old caches
