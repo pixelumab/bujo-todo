@@ -1,5 +1,5 @@
-const CACHE_NAME = 'todo-pwa-v2';
-const RUNTIME_CACHE = 'todo-pwa-runtime-v2';
+const CACHE_NAME = 'pixelum-bujo-v0.1.0';
+const RUNTIME_CACHE = 'pixelum-bujo-runtime-v0.1.0';
 
 // Assets to cache on install
 const PRECACHE_URLS = [

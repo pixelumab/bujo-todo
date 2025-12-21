@@ -72,7 +72,7 @@
 <div class="flex h-full max-h-full flex-col overflow-hidden">
 	<div class="flex-1 overflow-x-hidden overflow-y-auto p-4 pb-0">
 		<div class="mx-auto max-w-3xl px-2 sm:px-4">
-			<h1 class="mb-4 text-center text-2xl font-bold sm:mb-6 sm:text-3xl">Today's Notes</h1>
+			<h1 class="mb-4 text-center text-2xl font-bold sm:mb-6 sm:text-3xl">Today's Journal</h1>
 
 			<div class="space-y-4 pb-4 sm:space-y-6">
 				{#each groupedEntries as group (group.timestamp)}
