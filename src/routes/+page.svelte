@@ -172,7 +172,7 @@
 				<Input
 					type="text"
 					bind:value={newEntryText}
-					placeholder="What do you have on your mind?"
+					placeholder="What's on your mind?"
 					class="flex-1 border-0 bg-transparent px-1 py-0 text-base shadow-none focus-visible:ring-0 sm:px-2 sm:text-lg md:text-base"
 					aria-label="New entry text"
 					autocomplete="off"
