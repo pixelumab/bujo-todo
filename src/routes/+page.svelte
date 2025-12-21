@@ -84,19 +84,23 @@
 							{#each group.entries as entry (entry.id)}
 								<li class="flex items-start gap-2 py-0.5 sm:gap-3 sm:py-1">
 									<button
-										onclick={() => entry.type === 'task' && journalStore.toggleEntry(entry.id)}
-										class="flex flex-1 items-start gap-2 text-left transition-opacity hover:opacity-80 sm:gap-3"
-										class:cursor-pointer={entry.type === 'task'}
-										class:cursor-default={entry.type !== 'task'}
-										disabled={entry.type !== 'task'}
+										onclick={() =>
+											entry.type === 'task' &&
+											!entry.completed &&
+											journalStore.toggleEntry(entry.id)}
+										class="flex flex-1 items-center gap-2 text-left transition-opacity sm:gap-3"
+										class:cursor-pointer={entry.type === 'task' && !entry.completed}
+										class:cursor-default={entry.type !== 'task' || entry.completed}
+										class:hover:opacity-80={entry.type === 'task' && !entry.completed}
+										disabled={entry.type !== 'task' || entry.completed}
 										aria-label={entry.type === 'task'
 											? entry.completed
-												? `Mark task "${entry.text}" as incomplete`
+												? `Task completed: "${entry.text}"`
 												: `Mark task "${entry.text}" as complete`
 											: `${entry.type} entry: ${entry.text}`}
 									>
 										<span
-											class="mt-0.5 min-w-5 flex-shrink-0 font-mono text-lg leading-none select-none sm:min-w-6 sm:text-xl"
+											class="min-w-5 flex-shrink-0 font-mono text-lg leading-none select-none sm:min-w-6 sm:text-xl"
 											aria-hidden="true"
 										>
 											{getSymbol(entry.type, entry.completed)}
@@ -168,7 +172,7 @@
 				<Input
 					type="text"
 					bind:value={newEntryText}
-					placeholder="Message Bullet Journal..."
+					placeholder="What do you have on your mind?"
 					class="flex-1 border-0 bg-transparent px-1 py-0 text-base shadow-none focus-visible:ring-0 sm:px-2 sm:text-lg md:text-base"
 					aria-label="New entry text"
 					autocomplete="off"

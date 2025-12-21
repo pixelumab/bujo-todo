@@ -1,6 +1,5 @@
 <script lang="ts">
 	import './layout.css';
-	import favicon from '$lib/assets/favicon.svg';
 	import { browser } from '$app/environment';
 	import { base } from '$app/paths';
 	import { onMount } from 'svelte';
@@ -24,7 +23,7 @@
 <svelte:head>
 	<title>Pixelum ToDo - Simple Bullet Journal</title>
 	<meta name="description" content="Simple offline-first bullet journal application" />
-	<link rel="icon" href={favicon} />
+	<link rel="icon" href="{base}/icon.svg" />
 	<meta
 		name="viewport"
 		content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content"

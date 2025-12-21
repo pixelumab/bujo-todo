@@ -68,7 +68,11 @@ function setLastClearDate(date: string) {
 
 function getTodayDateString(): string {
 	const today = new Date();
-	return today.toISOString().split('T')[0]; // Returns YYYY-MM-DD
+	// Use local date instead of UTC to clear at local midnight
+	const year = today.getFullYear();
+	const month = String(today.getMonth() + 1).padStart(2, '0');
+	const day = String(today.getDate()).padStart(2, '0');
+	return `${year}-${month}-${day}`; // Returns YYYY-MM-DD in local timezone
 }
 
 function shouldClearEntries(): boolean {
@@ -110,7 +114,7 @@ class JournalStore {
 
 	toggleEntry(id: string) {
 		this.entries = this.entries.map((entry) =>
-			entry.id === id ? { ...entry, completed: !entry.completed } : entry
+			entry.id === id && !entry.completed ? { ...entry, completed: true } : entry
 		);
 		saveEntries(this.entries);
 	}
